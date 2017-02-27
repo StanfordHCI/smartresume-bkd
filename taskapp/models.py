@@ -16,6 +16,7 @@ class Task(models.Model):
     title = models.TextField(default='', blank=True, null=True)
     reward = models.TextField(default='', blank=True, null=True)
     status = models.TextField(default='', blank=True, null=True)
+    feedback = models.TextField(default='', blank=True, null=True)
 
     def __unicode__(self):
         return self.text
