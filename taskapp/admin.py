@@ -3,6 +3,6 @@ from models import *
 
 # Register your models here.
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('created', 'last_modified', 'name', 'is_checked', 'due_date', 'notes')
+    list_display = ('created', 'last_modified', 'worker_name', 'worker_id', 'requester_name', 'requester_id', 'title', 'reward', 'status', 'feedback')
 
 admin.site.register(Task, TaskAdmin)

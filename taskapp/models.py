@@ -9,10 +9,13 @@ import datetime
 class Task(models.Model):
     created = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
     last_modified = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
-    name = models.TextField(default='', blank=True, null=True)
-    is_checked = models.BooleanField(default=False)
-    due_date = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
-    notes = models.TextField(default='', blank=True, null=True)
+    worker_name = models.TextField(default='', blank=True, null=True)
+    worker_id = models.TextField(default='', blank=True, null=True)
+    requester_name = models.TextField(default='', blank=True, null=True)
+    requester_id = models.TextField(default='', blank=True, null=True)
+    title = models.TextField(default='', blank=True, null=True)
+    reward = models.TextField(default='', blank=True, null=True)
+    status = models.TextField(default='', blank=True, null=True)
 
     def __unicode__(self):
         return self.text
