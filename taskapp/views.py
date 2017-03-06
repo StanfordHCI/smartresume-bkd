@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
 
+from rest_framework.filters import SearchFilter, OrderingFilter, DjangoFilterBackend
+
 # Create your views here.
 from models import *
 from serializers import *
@@ -17,6 +19,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     * D - DELETE - DELETE /task/[id]/ - allowed for anyone
     '''
     queryset = Task.objects.all()
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)  
     permission_classes = (AllowAny,)
     filter_fields = '__all__'
     serializer_class = TaskSerializer
