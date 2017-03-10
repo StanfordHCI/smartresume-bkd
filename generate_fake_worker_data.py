@@ -2,9 +2,11 @@
 import calendar
 import time
 import string
+import datetime
+import requests
 from random import *
 
-NUM_SAMPLES = 1
+NUM_SAMPLES = 100
 BASE_URL = 'http://srbkd-env.us-west-2.elasticbeanstalk.com/'
 
 worker_opts = {'1': 'Ali Alkhatib', '2': 'Junwon Park', '3': 'Katharina Lix', '4': 'Jan Peters', '5': 'Melissa Valentine', '6': 'Niloufar Salehi', '7': 'Spam Girl', '8': 'Shirish Goyal', '9': 'Ranjay Krishna', '10': 'Sherry Ruan'} # {'worker_id': 'worker_name'}
@@ -21,20 +23,39 @@ status_opts = ['Approved - Pending Payment', 'Approved - Paid', 'Rejected', 'Pen
 
 feedback_opts = ['good', 'bad', 'very good']
 
-for s in NUM_SAMPLES:
-    worker_id = random.choice(worker_opts.keys())
+for s in range(0, NUM_SAMPLES):
+    worker_id = choice(worker_opts.keys())
     worker_name = worker_opts[worker_id]
-    requester_id = random.choice(requester_opts.keys())
+    requester_id = choice(requester_opts.keys())
     requester_name = requester_opts[requester_id]
     hit_id = str(int(time.time()*1000000)) + ''.join(choice(string.ascii_uppercase + string.digits) for _ in range(14)) # should be unique -- neg prob of being same
-    category_opts = random.choice(category_opts)
-    reward = "${:.2f}".format(round(random.random(), 2))
-    status = random.choice(status_opts)
-    feedback = random.choice(feedback_opts)
-    '''
+    category = choice(category_opts)
+    title = category + ' Task'
+    reward = "${:.2f}".format(round(random(), 2))
+    status = choice(status_opts)
+    feedback = choice(feedback_opts)
+    print '===making==='
+    print 'worker_id: ', worker_id
+    print 'worker_name: ', worker_name
+    print 'requester_id: ', requester_id
+    print 'requester_name: ', requester_name
+    print 'hit_id: ', hit_id
+    print 'category: ', category
+    print 'title: ', title
+    print 'reward: ', reward
+    print 'status: ', status
+    print 'feedback: ', feedback
     r = requests.post(BASE_URL + 'task/', data={
-        'number': 12524, 
-        'type': 'issue', 
-        'action': 'show'
+        'created': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"), 
+        'last_modified': datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S"), 
+        'worker_name': worker_name,
+        'worker_id': worker_id,
+        'requester_name': requester_name,
+        'requester_id': requester_id,
+        'hit_id': hit_id,
+        'category': category,
+        'title': title,
+        'reward': reward,
+        'status': status,
+        'feedback': feedback
     })
-    '''
