@@ -5,6 +5,9 @@ from taskapp.views import *
 
 router = routers.DefaultRouter()
 router.register(r'task', TaskViewSet)
+router.register(r'worker', WorkerViewSet)
+router.register(r'guild', GuildViewSet)
+router.register(r'guildworkermap', GuildWorkerMapViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),

@@ -31,15 +31,33 @@ class Worker(models.Model):
     worker_name = models.TextField(default='', blank=True, null=True)
     worker_id = models.TextField(default='', blank=True, null=True)
 
+    def __unicode__(self):
+        return self.worker_name
+
+    def __str__(self):
+        return self.worker_name
+
 class Guild(models.Model): 
     created = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
     last_modified = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
     guild_name = models.TextField(default='', blank=True, null=True)
     guild_creator_id = models.TextField(default='', blank=True, null=True) 
-    guild_creator_type = models.BooleanField(default=False) # false for requestor, true for worker
+    guild_creator_type = models.BooleanField(default=False) # false for requestor, true for worker (also false for requestor that is also a worker, i.e. like the "Govinda Dasu" in worker/requester sandbox)
+
+    def __unicode__(self):
+        return self.guild_name
+
+    def __str__(self):
+        return self.guild_name
 
 class GuildWorkerMap(models.Model):
     created = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)
     last_modified = models.DateTimeField(default=datetime.datetime.utcnow, blank=True, null=True)     
-    worker = models.ForeignKey('Worker', blank=True, null=True, related_name='guildworkermap')
-    guild = models.ForeignKey('Worker', blank=True, null=True, related_name='guildworkermap')
+    worker = models.ForeignKey('Worker', blank=True, null=True, related_name='guildworkermap_worker')
+    guild = models.ForeignKey('Guild', blank=True, null=True, related_name='guildworkermap_guild')
+
+    def __unicode__(self):
+        return self.text
+
+    def __str__(self):
+        return self.text
