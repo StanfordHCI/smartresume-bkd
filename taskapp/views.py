@@ -1,3 +1,4 @@
+import django_filters
 from django.shortcuts import render
 from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
@@ -56,6 +57,11 @@ class GuildViewSet(viewsets.ModelViewSet):
     filter_fields = '__all__'
     serializer_class = GuildSerializer
 
+class GuildWorkerMapFilter(django_filters.rest_framework.FilterSet):
+    class Meta:
+        model = GuildWorkerMap
+        fields = ['created', 'last_modified', 'worker__worker_id', 'guild__id']
+
 class GuildWorkerMapViewSet(viewsets.ModelViewSet):
     '''
     * Model Description: GuildWorkerMap is the model for the "guildworkermap".
@@ -67,8 +73,9 @@ class GuildWorkerMapViewSet(viewsets.ModelViewSet):
     * D - DELETE - DELETE /guildworkermap/[id]/ - allowed for anyone
     '''
     queryset = GuildWorkerMap.objects.all()
-    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter,)  
-    permission_classes = (AllowAny,)
-    filter_fields = '__all__'
     serializer_class = GuildWorkerMapSerializer
+    filter_backends = (django_filters.rest_framework.DjangoFilterBackend, DjangoFilterBackend, SearchFilter, OrderingFilter,)
+    permission_classes = (AllowAny,)
+    filter_class = GuildWorkerMapFilter
+    filter_fields = '__all__'
 

@@ -20,6 +20,8 @@ class GuildSerializer(serializers.ModelSerializer):
 
 
 class GuildWorkerMapSerializer(serializers.ModelSerializer):
+    worker = WorkerSerializer()
+    guild = GuildSerializer()
     class Meta:
         model = GuildWorkerMap
-        fields = '__all__'
+        fields = ('created', 'last_modified', 'worker', 'guild')
