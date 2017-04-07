@@ -25,8 +25,7 @@ SECRET_KEY = '5jzgtl*bz$qx5txa_v%!hl#eaye$j#64os@23)d^%gm2a@rpvy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'srbkd-env.us-west-2.elasticbeanstalk.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'srbkd-env.us-west-2.elasticbeanstalk.com', 'smartresumeonline.com', 'www.smartresumeonline.com']
 
 # Application definition
 
