@@ -63,8 +63,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
+    'workersandbox.mturkcontent.com',
     'workersandbox.mturk.com',
+    'requestersandbox.mturkcontent.com',
     'requestersandbox.mturk.com',
+    'mturkcontent.com',
     'mturk.com',
 )
 
