@@ -69,6 +69,7 @@ CORS_ORIGIN_WHITELIST = (
     'requestersandbox.mturk.com',
     'mturkcontent.com',
     'mturk.com',
+    's3-us-west-2.amazonaws.com',
 )
 
 # CORS_ALLOW_METHODS default is fine
